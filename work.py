@@ -23,3 +23,23 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S
 import api.states.python_anticaptcha as anticap
 ANTICAPTCHA_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
 
+class webauto_base():
+    def __init__(self):
+        pass
+
+    # Start chrome browser for automation
+    def start_browser(self):
+        try:
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--no-sandbox")
+            self.browser = webdriver.Chrome(executable_path='chromedriver', chrome_options = chrome_options)
+            return True
+        except Exception as e:
+            # If the exception is related to the chrome version, try to download the latest chromedriver
+            if 'Chrome version' in str(e):
+                latest_ver = self.get_chrome_version()['windows']
+                self.update_chromedriver(latest_ver)
+            self.log_error(str(e))
+            self.log_error("ERROR: Failed to start the browser")
+            self.browser = None
+            return False
