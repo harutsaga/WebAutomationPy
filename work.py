@@ -98,3 +98,8 @@ class webauto_base():
     def delay(self, timeout = 3):
         self.browser.implicitly_wait(timeout)
         
+    # number of occurences for specified xpath
+    def occurence(self, xpath):
+        try:
+            elems = self.browser.find_elements_by_xpath(xpath)
+            return len(elems)
