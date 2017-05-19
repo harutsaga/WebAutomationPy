@@ -343,3 +343,8 @@ class webauto_base():
         try:
             now = time.time()
             future = now + timeout
+            while time.time() < future:
+                pass
+            return True
+        except Exception as e:
+            return False
