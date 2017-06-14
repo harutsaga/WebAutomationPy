@@ -473,3 +473,8 @@ class webauto_base():
             return val
         except:
             return ''
+    def set_value(self, xpath, val, field='value'):
+        script = """(function() 
+                        {
+                            node = document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                            if (node==null) 
