@@ -478,3 +478,8 @@ class webauto_base():
                         {
                             node = document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
                             if (node==null) 
+                                return '';
+                            node.%s='%s'; 
+                            return 'ok';
+                })()"""%(xpath,field,val)
+        # print(script)
