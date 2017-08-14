@@ -763,3 +763,23 @@ class webauto_base():
                         js = """
                             xpath = "%s";
                             y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                            y.click()
+                            """%(xpath)
+                        self.browser.execute_script(js)
+                    return True
+            return False
+        except Exception as e:
+            self.log_error(str(e))
+
+    def middle_click(self, xpath, timeout = 3):
+        js = """
+            xpath = "%s";
+            var mouseWheelClick = new MouseEvent('click', {'button': 1, 'which': 1 });
+            y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            y.dispatchEvent(mouseWheelClick)
+            """%(xpath)
+        self.browser.execute_script(js)
+    
+    def expand_shadow_element(self, element):
+        try:
+            shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
