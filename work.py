@@ -1023,3 +1023,8 @@ class webauto_base():
                 target = self.browser.find_element_by_xpath(xpath)
                 if target is not None:
                     if mode == 0:
+                        target.click()
+                    elif mode == 1:
+                        js = """
+                            xpath = "%s";
+                            y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
