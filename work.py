@@ -1043,3 +1043,23 @@ class webauto_base():
             y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
             y.dispatchEvent(mouseWheelClick)
             """%(xpath)
+# Abstract web automation class
+# 2019.09 David
+
+import time
+from selenium import webdriver
+from selenium.webdriver.firefox import options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.proxy import Proxy, ProxyType
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.proxy import *
+from selenium.common.exceptions import TimeoutException
+
+from bs4 import BeautifulSoup as bs
+import requests
+import urllib.request as req
+
+import logging
