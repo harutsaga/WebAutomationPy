@@ -1068,3 +1068,13 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S
 import api.states.python_anticaptcha as anticap
 ANTICAPTCHA_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
 
+class webauto_base():
+    def __init__(self):
+        pass
+
+    # Start chrome browser for automation
+    def start_browser(self):
+        try:
+            chrome_options = webdriver.ChromeOptions()
+            chrome_options.add_argument("--no-sandbox")
+            self.browser = webdriver.Chrome(executable_path='chromedriver', chrome_options = chrome_options)
