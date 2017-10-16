@@ -1078,3 +1078,23 @@ class webauto_base():
             chrome_options = webdriver.ChromeOptions()
             chrome_options.add_argument("--no-sandbox")
             self.browser = webdriver.Chrome(executable_path='chromedriver', chrome_options = chrome_options)
+            return True
+        except Exception as e:
+            # If the exception is related to the chrome version, try to download the latest chromedriver
+            if 'Chrome version' in str(e):
+                latest_ver = self.get_chrome_version()['windows']
+                self.update_chromedriver(latest_ver)
+            self.log_error(str(e))
+            self.log_error("ERROR: Failed to start the browser")
+            self.browser = None
+            return False
+
+    def get_chrome_version(self):
+        url = "https://www.whatismybrowser.com/guides/the-latest-version/chrome"
+        response = requests.request("GET", url)
+
+        soup = bs(response.text, 'html.parser')
+        rows = soup.select('td strong')
+        version = {}
+        version['windows'] = rows[0].parent.next_sibling.next_sibling.text
+        version['macos'] = rows[1].parent.next_sibling.next_sibling.text
