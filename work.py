@@ -1608,3 +1608,13 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.proxy import *
 from selenium.common.exceptions import TimeoutException
 
+from bs4 import BeautifulSoup as bs
+import requests
+import urllib.request as req
+
+import logging
+logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p')
+
+import api.states.python_anticaptcha as anticap
+ANTICAPTCHA_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
+
