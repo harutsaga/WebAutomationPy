@@ -1618,3 +1618,8 @@ logging.basicConfig(format='%(asctime)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S
 import api.states.python_anticaptcha as anticap
 ANTICAPTCHA_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxx'
 
+class webauto_base():
+    def __init__(self):
+        pass
+
+    # Start chrome browser for automation
