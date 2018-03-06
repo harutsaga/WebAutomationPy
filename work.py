@@ -1798,3 +1798,8 @@ class webauto_base():
                         return True
                 except:
                     return True
+            return False
+        except Exception as e:
+            self.log_error(str(e))(str(e))
+            return False
+
