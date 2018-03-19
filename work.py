@@ -1833,3 +1833,38 @@ class webauto_base():
                 target = self.browser.find_element_by_xpath(xpath)
                 if target is not None:
                     if mode == 0:
+                        target.click()
+                    elif mode == 1:
+                        js = """
+                            xpath = "%s";
+                            y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                            y.click()
+                            """%(xpath)
+                        self.browser.execute_script(js)
+                    return True
+            return False
+        except Exception as e:
+            self.log_error(str(e))
+
+    def middle_click(self, xpath, timeout = 3):
+        js = """
+            xpath = "%s";
+            var mouseWheelClick = new MouseEvent('click', {'button': 1, 'which': 1 });
+            y=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            y.dispatchEvent(mouseWheelClick)
+            """%(xpath)
+        self.browser.execute_script(js)
+    
+    def expand_shadow_element(self, element):
+        try:
+            shadow_root = self.browser.execute_script('return arguments[0].shadowRoot', element)
+            return shadow_root
+        except Exception as e:
+            self.log_error(str(e))
+            return None
+
+    def allow_popup(self):
+        try:
+            self.navigate("chrome://settings/content/popups")
+            elem = self.browser.find_element_by_tag_name('settings-ui')
+            sr = self.expand_shadow_element(elem)
