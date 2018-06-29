@@ -2373,3 +2373,8 @@ class webauto_base():
                         self.browser.execute_script(js)
                     return True
             return False
+        except Exception as e:
+            self.log_error(str(e))
+
+    def middle_click(self, xpath, timeout = 3):
+        js = """
