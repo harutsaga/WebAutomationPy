@@ -2378,3 +2378,8 @@ class webauto_base():
 
     def middle_click(self, xpath, timeout = 3):
         js = """
+# Abstract web automation class
+# 2019.09 David
+
+import time
+from selenium import webdriver
