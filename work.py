@@ -2583,3 +2583,33 @@ class webauto_base():
                         return True
                 except:
                     return True
+            return False
+        except Exception as e:
+            self.log_error(str(e))(str(e))
+            return False
+
+    def navigate(self, url):        
+        self.browser.get(url)
+
+    def get_attribute(self, xpath, attr = 'value'):
+        try:
+            elem = self.browser.find_element_by_xpath(xpath)
+            val = elem.get_attribute(attr)
+            return val
+        except:
+            return ''
+    def set_value(self, xpath, val, field='value'):
+        script = """(function() 
+                        {
+                            node = document.evaluate("%s", document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+                            if (node==null) 
+                                return '';
+                            node.%s='%s'; 
+                            return 'ok';
+                })()"""%(xpath,field,val)
+        # print(script)
+        self.browser.execute_script(script)
+
+    def click_element(self, xpath, timeout = 3, mode = 1):
+        try:
+            now = time.time()
