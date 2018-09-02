@@ -2698,3 +2698,8 @@ class webauto_base():
             self.log_error("ERROR: Failed to start the browser")
             self.browser = None
             return False
+
+    def get_chrome_version(self):
+        url = "https://www.whatismybrowser.com/guides/the-latest-version/chrome"
+        response = requests.request("GET", url)
+
