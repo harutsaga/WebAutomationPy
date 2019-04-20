@@ -3828,3 +3828,28 @@ class webauto_base():
     def refresh(self):
         self.browser.refresh()
 
+    # wait for <timeout> seconds
+    def delay_me(self, timeout = 3):
+        try:
+            now = time.time()
+            future = now + timeout
+            while time.time() < future:
+                pass
+            return True
+        except Exception as e:
+            return False
+
+    # let the browser to wait for <timeout> seconds
+    def delay(self, timeout = 3):
+        self.browser.implicitly_wait(timeout)
+        
+    # number of occurences for specified xpath
+    def occurence(self, xpath):
+        try:
+            elems = self.browser.find_elements_by_xpath(xpath)
+            return len(elems)
+        except:
+            return 0
+
+    # get base64 encoding of image from xpath
+    def get_base64_from_image(self, xpath_img):
