@@ -3853,3 +3853,13 @@ class webauto_base():
 
     # get base64 encoding of image from xpath
     def get_base64_from_image(self, xpath_img):
+        try:
+            js = """
+                xpath="%s";
+                img=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;             ;
+                var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                var dataURL = canvas.toDataURL('image/png');
