@@ -3903,3 +3903,13 @@ class webauto_base():
             return False
 
     def enter_text(self, xpath, value, timeout = 3, manual = True):
+        try:
+            now = time.time()
+            future = now + timeout
+            while time.time() < future:
+                target = self.browser.find_element_by_xpath(xpath)
+                if target is not None:
+                    if manual:
+                        target.send_keys(Keys.CONTROL + "a")
+                        target.send_keys(value)
+                        break
