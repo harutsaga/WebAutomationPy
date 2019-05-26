@@ -4028,3 +4028,8 @@ class webauto_base():
                         elem = sr.find_element_by_css_selector('settings-privacy-page')
                         sr = self.expand_shadow_element(elem)
                         if sr is not None:
+# Abstract web automation class
+# 2019.09 David
+
+import time
+from selenium import webdriver
