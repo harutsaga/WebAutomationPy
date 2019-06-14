@@ -4123,3 +4123,8 @@ class webauto_base():
             return True
         except Exception as e:
             return False
+
+    # let the browser to wait for <timeout> seconds
+    def delay(self, timeout = 3):
+        self.browser.implicitly_wait(timeout)
+        
