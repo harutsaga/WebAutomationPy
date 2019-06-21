@@ -4153,3 +4153,13 @@ class webauto_base():
             res = self.browser.execute_script(js)
             return res
         except Exception as e:
+            print(js)
+            print(str(e))
+            return ''
+
+    # solve image-captcha automatically and return the result
+    def solve_img_captcha(self, img_path, xpath_result):
+        global ANTICAPTCHA_KEY
+        try:
+            api_key = ANTICAPTCHA_KEY
+            client = anticap.AnticaptchaClient(api_key)
