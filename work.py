@@ -4423,3 +4423,13 @@ class webauto_base():
                 xpath="%s";
                 img=document.evaluate(xpath, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;             ;
                 var canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                var ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+                var dataURL = canvas.toDataURL('image/png');
+                return dataURL.replace(/^data:image\/(png|jpg);base64,/, '');
+                """%(xpath_img)
+            res = self.browser.execute_script(js)
+            return res
+        except Exception as e:
