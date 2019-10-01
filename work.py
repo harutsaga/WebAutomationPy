@@ -4653,3 +4653,23 @@ class webauto_base():
         version['ios'] = rows[4].parent.next_sibling.next_sibling.text
         return version
 
+    # logging helper functions
+    def log_error(self, log):
+        logging.error(log)
+
+    def log_info(self, log):
+        logging.info(log)
+
+    # switch to the idx-th tab
+    def switch_tab(self, idx):
+        try:
+            self.browser.switch_to.window(self.browser.window_handles[idx])
+        except:
+            return
+    
+    # open a new tab with url
+    def new_tab(self, url = ''):
+        try:
+            self.browser.execute_script("window.open('%s','_blank');"%url)
+        except:
+            return
