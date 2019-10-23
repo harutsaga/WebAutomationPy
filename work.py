@@ -4778,3 +4778,8 @@ class webauto_base():
             while time.time() < future:
                 try:
                     target = self.browser.find_element_by_xpath(xpath)
+                    if target is not None:
+                        return True
+                except:
+                    pass
+            return False
